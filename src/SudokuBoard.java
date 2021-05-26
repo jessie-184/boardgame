@@ -126,6 +126,9 @@ public class SudokuBoard extends JFrame implements ActionListener, KeyListener{
 				if(sudoku.get(r, c) != 0) {
 					grid[r][c].setText(sudoku.get(r, c) + "");
 				}
+				if(sudoku.get(r, c) == 0) {
+					grid[r][c].setText("");
+				}
 			}
 		}
 	}
@@ -141,7 +144,7 @@ public class SudokuBoard extends JFrame implements ActionListener, KeyListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sudoku.showHint();
-				repaint();
+				printGame();
 			}
 		});
 		
@@ -149,7 +152,7 @@ public class SudokuBoard extends JFrame implements ActionListener, KeyListener{
 			@Override
             public void actionPerformed(ActionEvent e) {
                 sudoku = new Sudoku("easy.txt");
-                repaint();
+                printGame();
             }
 		});
 		
@@ -157,7 +160,7 @@ public class SudokuBoard extends JFrame implements ActionListener, KeyListener{
 			@Override
             public void actionPerformed(ActionEvent e) {
 				sudoku = new Sudoku("easy.txt");
-                repaint();
+				printGame();
             }
 		});
 		
@@ -165,7 +168,7 @@ public class SudokuBoard extends JFrame implements ActionListener, KeyListener{
 			@Override
             public void actionPerformed(ActionEvent e) {
 				sudoku = new Sudoku("easy.txt");
-                repaint();
+				printGame();
             }
 		});
 		
@@ -245,8 +248,8 @@ public class SudokuBoard extends JFrame implements ActionListener, KeyListener{
 					canTry--;
 					temp[I][J] = -1;
 					grid[I][J].setForeground(Color.RED);
-					numTry.setText("Có thể sai " + canTry + " lần");
-					if (canTry == -1) {
+					numTry.setText("You can try " + canTry + " times");
+					if (canTry == 0) {
 						JOptionPane.showMessageDialog(null, "You were wrong 3 times. \nPlay again!");
 						numTry.setText("You lose");
 						new SudokuBoard();
